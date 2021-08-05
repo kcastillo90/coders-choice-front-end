@@ -20,6 +20,12 @@ li {
   margin: 20px;
 }
 
+.city-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .img-div {
   height: 300px;
   width: 100%;
@@ -35,6 +41,25 @@ input {
   margin: 5px;
 }
 
+.form-details input {
+  width: 100%;
+  clear: both;
+}
+
+.submit-delete-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 button {
-  margin-left: 5px;
+  height: 38px;
+  margin: 5px;
+}
+
+#add-city {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
 }

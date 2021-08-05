@@ -13,6 +13,7 @@ const Cities = (props) => {
   const [newCountry, setNewCountry] = useState('')
   const [newPopulation, setNewPopulation] = useState('')
   const [newImage, setNewImage] = useState('')
+  const [showDetails, setShowDetails] = useState(false)
 
   // useEffect
   useEffect(() => {
@@ -62,6 +63,14 @@ const Cities = (props) => {
 
   const handleUpdateImage = (event) => {
     setNewImage(event.target.value)
+  }
+
+  const handleShowDetails = (event) => {
+    if (showDetails === false) {
+      setShowDetails(true)
+    } else {
+      setShowDetails(false)
+    }
   }
 
   const handleNewCitySubmit = (event) => {
@@ -128,21 +137,37 @@ const Cities = (props) => {
             cities.map((city) => {
               return <li>
                 <div class="img-div">
-                  <img src={city.image}/>
+                  <img src={city.image} onClick={handleShowDetails}/>
                 </div>
-                <h3>{city.name}</h3>
-                <h3>{city.state}</h3>
-                <h3>{city.country}</h3>
-                <h3>{city.population}</h3>
-                <form id="edit-city" onSubmit={ (event) => { handleUpdateCity(city) }}>
-                  Name:       <input name="name" type="text" onChange={handleUpdateName}/><br />
-                  State:      <input name="state" type="text" onChange={handleUpdateState}/><br />
-                  Country:    <input name="country" type="text" onChange={handleUpdateCountry}/><br />
-                  Population: <input name="population" type="text" onChange={handleUpdatePopulation}/><br />
-                  Image:      <input name="image" type="text" onChange={handleUpdateImage}/><br />
-                  <input class="btn btn-secondary" type="submit" value="SUBMIT EDITS"/>
-                  <button class="btn btn-danger" onClick={ (event) => { handleDelete(city) }}>DELETE CITY</button>
-                </form>
+                <div class="city-details">
+                  <h3>{city.name}</h3>
+                </div>
+
+                {showDetails === true ? (
+                  <div id="details-edit-container">
+                    <div class="city-details">
+                      <h3>{city.state}</h3>
+                      <h3>{city.country}</h3>
+                      <h3>{city.population}</h3>
+                    </div>
+                    <form id="edit-city" onSubmit={ (event) => { handleUpdateCity(city) }}>
+                      <div class="form-details">
+                        Name: <input name="name" type="text" onChange={handleUpdateName}/><br />
+                        State: <input name="state" type="text" onChange={handleUpdateState}/><br />
+                        Country: <input name="country" type="text" onChange={handleUpdateCountry}/><br />
+                        Population: <input name="population" type="text" onChange={handleUpdatePopulation}/><br />
+                        Image: <input name="image" type="text" onChange={handleUpdateImage}/><br />
+                      </div>
+                      <div class="submit-delete-btns">
+                        <input class="btn btn-secondary" type="submit" value="SUBMIT EDITS"/>
+                        <button class="btn btn-danger" onClick={ (event) => { handleDelete(city) }}>DELETE CITY</button>
+                      </div>
+                    </form>
+                  </div>
+                ) : (
+                  <h5>Click image for details and edit form</h5>
+                )}
+
               </li>
             })
           }
@@ -151,11 +176,13 @@ const Cities = (props) => {
       <section id="add">
         <h2>ADD CITY:</h2>
         <form id="add-city" onSubmit={handleNewCitySubmit}>
-          Name: <input type="text" onChange={handleNewName}/>
-          State: <input name="state" onChange={handleNewState}/>
-          Country: <input name="country" onChange={handleNewCountry}/>
-          Population: <input name="population" onChange={handleNewPopulation}/>
-          Image: <input name="image" onChange={handleNewImage}/>
+          <div class="form-details">
+            Name: <input type="text" onChange={handleNewName}/>
+            State: <input name="state" onChange={handleNewState}/>
+            Country: <input name="country" onChange={handleNewCountry}/>
+            Population: <input name="population" onChange={handleNewPopulation}/>
+            Image: <input name="image" onChange={handleNewImage}/>
+          </div>
           <input class="btn btn-success" type="submit" value="ADD CITY"/>
         </form>
       </section>
