@@ -9,7 +9,7 @@ const App = () => {
   let [cities, getCities] = useState('')
 
   return(
-    <div id="main-container">
+    <div>
 
       <Cities cities={cities}/>
 
