@@ -16,7 +16,14 @@
 }
 
 li {
-  width: 25%;
+  width: 350px;
+  margin: 20px;
+}
+
+.city-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .img-div {
@@ -28,4 +35,31 @@ img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+input {
+  margin: 5px;
+}
+
+.form-details input {
+  width: 100%;
+  clear: both;
+}
+
+.submit-delete-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+button {
+  height: 38px;
+  margin: 5px;
+}
+
+#add-city {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
 }
