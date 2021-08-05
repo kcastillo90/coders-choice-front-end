@@ -17,7 +17,7 @@ const Cities = (props) => {
   // useEffect
   useEffect(() => {
     axios
-    .get('http://localhost:3000/')
+    .get('http://localhost:3000/cities')
     .then((response)=>{
       setCities(response.data)
     })
@@ -67,7 +67,7 @@ const Cities = (props) => {
   const handleNewCitySubmit = (event) => {
     event.preventDefault()
     axios.post(
-      'http://localhost:3000',
+      'http://localhost:3000/cities',
       {
         name: newName,
         state: newState,
@@ -77,7 +77,7 @@ const Cities = (props) => {
       }
     ).then( () => {
       axios
-        .get('http://localhost:3000')
+        .get('http://localhost:3000/cities')
         .then((response) => {
           setCities(response.data)
           document.getElementById("add-city").reset()
@@ -88,7 +88,7 @@ const Cities = (props) => {
   const handleUpdateCity = (cityData) => {
     axios
     .put(
-      `http://localhost:3000/${cityData._id}`,
+      `http://localhost:3000/cities/${cityData._id}`,
       {
         name: newName,
         state: newState,
@@ -99,7 +99,7 @@ const Cities = (props) => {
     )
     .then( () => {
       axios
-        .get('http://localhost:3000/')
+        .get('http://localhost:3000/cities')
         .then((response) => {
           setCities(response.data)
           document.getElementById('edit-city').reset()
@@ -109,10 +109,10 @@ const Cities = (props) => {
 
   const handleDelete = (cityData) => {
     axios
-      .delete(`http://localhost:3000/${cityData._id}`)
+      .delete(`http://localhost:3000/cities/${cityData._id}`)
       .then( () => {
         axios
-          .get('http://localhost:3000')
+          .get('http://localhost:3000/cities')
           .then((response) => {
             setCities(response.data)
           })
@@ -120,14 +120,16 @@ const Cities = (props) => {
   }
 
   return(
-    <main>
+    <main  id="main-container">
       <h1>CITIES OF THE WORLD</h1>
       <section id="display">
         <ul id="cities-list">
           {
             cities.map((city) => {
               return <li>
-                <img src={city.image}/>
+                <div class="img-div">
+                  <img src={city.image}/>
+                </div>
                 <h3>{city.name}</h3>
                 <h3>{city.state}</h3>
                 <h3>{city.country}</h3>
@@ -138,27 +140,27 @@ const Cities = (props) => {
                   Country: <input name="country" type="text" onChange={handleUpdateCountry}/><br />
                   Population: <input name="population" type="text" onChange={handleUpdatePopulation}/><br />
                   Image: <input name="image" type="text" onChange={handleUpdateImage}/><br />
-                  <input class="btn btn-secondary" type="submit" value="EDIT CITY"/>
+                  <input class="btn btn-secondary" type="submit" value="SUBMIT EDITS"/>
+                  <button class="btn btn-danger" onClick={ (event) => { handleDelete(city) }}>DELETE CITY</button>
                 </form>
               </li>
             })
           }
         </ul>
       </section>
-
-
-
-
-
       <section id="add">
-        <h3>ADD CITY:</h3>
+        <h2>ADD CITY:</h2>
+        <form id="add-city" onSubmit={handleNewCitySubmit}>
+          Name: <input type="text" onChange={handleNewName}/>
+          State: <input name="state" onChange={handleNewState}/>
+          Country: <input name="country" onChange={handleNewCountry}/>
+          Population: <input name="population" onChange={handleNewPopulation}/>
+          Image: <input name="image" onChange={handleNewImage}/>
+          <input class="btn btn-success" type="submit" value="ADD CITY"/>
+        </form>
       </section>
-
     </main>
-
-
-
-    )
+  )
 }
 
 export default Cities
