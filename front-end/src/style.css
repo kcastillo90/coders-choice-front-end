@@ -16,7 +16,8 @@
 }
 
 li {
-  width: 25%;
+  width: 350px;
+  margin: 20px;
 }
 
 .img-div {
@@ -28,4 +29,12 @@ img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+input {
+  margin: 5px;
+}
+
+button {
+  margin-left: 5px;
 }

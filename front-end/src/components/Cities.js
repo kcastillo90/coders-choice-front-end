@@ -135,11 +135,11 @@ const Cities = (props) => {
                 <h3>{city.country}</h3>
                 <h3>{city.population}</h3>
                 <form id="edit-city" onSubmit={ (event) => { handleUpdateCity(city) }}>
-                  Name: <input name="name" type="text" onChange={handleUpdateName}/><br />
-                  State: <input name="state" type="text" onChange={handleUpdateState}/><br />
-                  Country: <input name="country" type="text" onChange={handleUpdateCountry}/><br />
+                  Name:       <input name="name" type="text" onChange={handleUpdateName}/><br />
+                  State:      <input name="state" type="text" onChange={handleUpdateState}/><br />
+                  Country:    <input name="country" type="text" onChange={handleUpdateCountry}/><br />
                   Population: <input name="population" type="text" onChange={handleUpdatePopulation}/><br />
-                  Image: <input name="image" type="text" onChange={handleUpdateImage}/><br />
+                  Image:      <input name="image" type="text" onChange={handleUpdateImage}/><br />
                   <input class="btn btn-secondary" type="submit" value="SUBMIT EDITS"/>
                   <button class="btn btn-danger" onClick={ (event) => { handleDelete(city) }}>DELETE CITY</button>
                 </form>
